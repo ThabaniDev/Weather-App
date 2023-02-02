@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Weather App</title>
+    <meta name="theme-color" content="#ffffff" />
+    <meta
+      name="twitter:description"
+      content="Get accurate weather updates for your location with our simple weather app. See current conditions, temperature, precipitation, humidity and wind speed with just a few taps."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:type" content="website" />
+    <meta
+      name="description"
+      content="Get accurate weather updates for your location with our simple weather app. See current conditions, temperature, precipitation, humidity and wind speed with just a few taps."
+    />
+    <meta
+      property="og:image"
+      content="https://ThabaniDev.github.io/Weather-App/assets/img/Screenshot from 2023-02-02 14-08-00.png"
+    />
+    <meta
+      name="twitter:image"
+      content="https://ThabaniDev.github.io/Weather-App/assets/img/Screenshot from 2023-02-02 14-08-00.png"
+    />
+    <meta name="twitter:title" content="Weather App" />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="180x180"
+      href="/assets/img/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/img/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/img/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="180x180"
+      href="/assets/img/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/assets/img/android-chrome-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="/assets/img/android-chrome-512x512.png"
+    />
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="manifest" href="/manifest.json" />
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <style>
+      body {
+        background-image: url("./assets/img/default.jpg");
+        background-position: top;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+    </style>
+  </head>
+
+  <body style="min-height: 100vh">
+    <section class="text-light" style="margin-bottom: 10px">
+      <div class="container" style="padding: 5px 12px">
+        <h1 class="display-2 text-center">Weather App</h1>
+      </div>
+    </section>
+    <section style="margin-bottom: 10px">
+      <div class="container" style="padding: 5px 12px">
+        <div class="input-group">
+          <input
+            class="form-control fs-4"
+            type="text"
+            id="city"
+            placeholder="Search location here..."
+          /><button
+            class="btn btn-primary btn-lg"
+            id="search-btn"
+            type="button"
+          >
+            Search
+          </button>
+        </div>
+        <div class="container">
+          <div id="results" class="list-group"></div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div
+        class="container d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center text-light"
+        style="margin-bottom: 10px; margin-top: 10px; display: flex"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="-64 0 512 512"
+          width="1em"
+          height="1em"
+          fill="currentColor"
+          class="h3"
+        >
+          <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+          <path
+            d="M168.3 499.2C116.1 435 0 279.4 0 192C0 85.96 85.96 0 192 0C298 0 384 85.96 384 192C384 279.4 267 435 215.7 499.2C203.4 514.5 180.6 514.5 168.3 499.2H168.3zM192 256C227.3 256 256 227.3 256 192C256 156.7 227.3 128 192 128C156.7 128 128 156.7 128 192C128 227.3 156.7 256 192 256z"
+          ></path></svg
+        ><span id="location" class="h3" style="margin-left: 10px"
+          >Weather in...</span
+        >
+      </div>
+      <div
+        class="container text-light"
+        style="background: var(--bs-card-cap-bg)"
+      >
+        <div class="row">
+          <div
+            class="col-md-12 d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center"
+          >
+            <img id="icon" loading="eager" /><span
+              id="weather-condition"
+              class="h5"
+            ></span>
+          </div>
+        </div>
+        <div class="row gy-4" style="margin-top: 10px">
+          <div
+            class="col-md-6 d-flex d-md-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center bg-gradient"
+          >
+            <div
+              class="d-md-flex justify-content-md-center align-items-md-center"
+              style="display: flex"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+                width="1em"
+                height="1em"
+                fill="currentColor"
+                class="fs-4"
+              >
+                <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                  d="M160 322.9V304C160 295.3 152.8 288 144 288S128 295.3 128 304v18.88C109.4 329.5 96 347.1 96 368C96 394.5 117.5 416 144 416S192 394.5 192 368C192 347.1 178.6 329.5 160 322.9zM256 112c0-61.88-50.13-112-112-112s-112 50.13-112 112v166.5c-19.75 24.75-32 55.5-32 89.5c0 79.5 64.5 144 144 144s144-64.5 144-144c0-33.1-12.25-64.88-32-89.5V112zM144 448c-44.13 0-80-35.88-80-80c0-25.5 12.25-48.88 32-63.75v-192.3c0-26.5 21.5-48 48-48s48 21.5 48 48v192.1c19.75 14.75 32 38.38 32 63.88C224 412.1 188.1 448 144 448zM416 0c-52.88 0-96 43.13-96 96s43.13 96 96 96s96-43.13 96-96S468.9 0 416 0zM416 128c-17.75 0-32-14.25-32-32s14.25-32 32-32s32 14.25 32 32S433.8 128 416 128z"
+                ></path></svg
+              ><span class="fs-4" style="margin-left: 10px">Temperature</span>
+            </div>
+            <span id="temperature" class="fs-4"></span>
+          </div>
+          <div
+            class="col-md-6 d-flex d-md-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center bg-gradient"
+          >
+            <div
+              class="d-md-flex justify-content-md-center align-items-md-center"
+              style="display: flex"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 -32 576 576"
+                width="1em"
+                height="1em"
+                fill="currentColor"
+                class="fs-4"
+              >
+                <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                  d="M223.1 0C262.6 0 295.9 22.82 311.2 55.7C325.7 41.07 345.8 32 368 32C406.7 32 438.1 59.48 446.4 96H448C483.3 96 512 124.7 512 160C512 195.3 483.3 224 448 224H127.1C92.65 224 63.1 195.3 63.1 160C63.1 124.7 92.65 96 127.1 96C127.1 42.98 170.1 0 223.1 0zM92.58 372.3C85.76 383.7 71.02 387.4 59.65 380.6C48.29 373.8 44.6 359 51.42 347.7L99.42 267.7C106.2 256.3 120.1 252.6 132.3 259.4C143.7 266.2 147.4 280.1 140.6 292.3L92.58 372.3zM468.3 259.4C479.7 266.2 483.4 280.1 476.6 292.3L428.6 372.3C421.8 383.7 407 387.4 395.7 380.6C384.3 373.8 380.6 359 387.4 347.7L435.4 267.7C442.2 256.3 456.1 252.6 468.3 259.4V259.4zM204.6 372.3C197.8 383.7 183 387.4 171.7 380.6C160.3 373.8 156.6 359 163.4 347.7L211.4 267.7C218.2 256.3 232.1 252.6 244.3 259.4C255.7 266.2 259.4 280.1 252.6 292.3L204.6 372.3zM356.3 259.4C367.7 266.2 371.4 280.1 364.6 292.3L316.6 372.3C309.8 383.7 295 387.4 283.7 380.6C272.3 373.8 268.6 359 275.4 347.7L323.4 267.7C330.2 256.3 344.1 252.6 356.3 259.4V259.4zM384 448C410.9 448 439.4 437.2 461.4 421.9L461.5 421.9C473.4 413.4 489.5 414.1 500.7 423.6C515 435.5 533.2 444.6 551.3 448.8C568.5 452.8 579.2 470.1 575.2 487.3C571.2 504.5 553.1 515.2 536.7 511.2C512.2 505.4 491.9 494.6 478.5 486.2C449.5 501.7 417 512 384 512C352.1 512 323.4 502.1 303.6 493.1C297.7 490.5 292.5 487.8 288 485.4C283.5 487.8 278.3 490.5 272.4 493.1C252.6 502.1 223.9 512 192 512C158.1 512 126.5 501.7 97.5 486.2C84.12 494.6 63.79 505.4 39.27 511.2C22.06 515.2 4.853 504.5 .8422 487.3C-3.169 470.1 7.532 452.8 24.74 448.8C42.84 444.6 60.96 435.5 75.31 423.6C86.46 414.1 102.6 413.4 114.5 421.9L114.6 421.9C136.7 437.2 165.1 448 192 448C219.5 448 247 437.4 269.5 421.9C280.6 414 295.4 414 306.5 421.9C328.1 437.4 356.5 448 384 448H384z"
+                ></path></svg
+              ><span class="fs-4" style="margin-left: 10px">Precipitation</span>
+            </div>
+            <span id="precipitation" class="fs-4"></span>
+          </div>
+        </div>
+        <div class="row gy-4 mb-3" style="margin-top: 10px">
+          <div
+            class="col-md-6 d-flex d-md-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center bg-gradient"
+          >
+            <div
+              class="d-md-flex justify-content-md-center align-items-md-center"
+              style="display: flex"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="-64 0 512 512"
+                width="1em"
+                height="1em"
+                fill="currentColor"
+                class="fs-4"
+              >
+                <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                  d="M16 319.1C16 245.9 118.3 89.43 166.9 19.3C179.2 1.585 204.8 1.585 217.1 19.3C265.7 89.43 368 245.9 368 319.1C368 417.2 289.2 496 192 496C94.8 496 16 417.2 16 319.1zM112 319.1C112 311.2 104.8 303.1 96 303.1C87.16 303.1 80 311.2 80 319.1C80 381.9 130.1 432 192 432C200.8 432 208 424.8 208 416C208 407.2 200.8 400 192 400C147.8 400 112 364.2 112 319.1z"
+                ></path></svg
+              ><span class="fs-4" style="margin-left: 10px">Humidity</span>
+            </div>
+            <span id="humidity" class="fs-4"></span>
+          </div>
+          <div
+            class="col-md-6 d-flex d-md-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center bg-gradient"
+          >
+            <div
+              class="d-md-flex justify-content-md-center align-items-md-center"
+              style="display: flex"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+                width="1em"
+                height="1em"
+                fill="currentColor"
+                class="fs-4"
+              >
+                <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                  d="M32 192h320c52.94 0 96-43.06 96-96s-43.06-96-96-96h-32c-17.69 0-32 14.31-32 32s14.31 32 32 32h32c17.66 0 32 14.34 32 32s-14.34 32-32 32H32C14.31 128 0 142.3 0 160S14.31 192 32 192zM160 320H32c-17.69 0-32 14.31-32 32s14.31 32 32 32h128c17.66 0 32 14.34 32 32s-14.34 32-32 32H128c-17.69 0-32 14.31-32 32s14.31 32 32 32h32c52.94 0 96-43.06 96-96S212.9 320 160 320zM416 224H32C14.31 224 0 238.3 0 256s14.31 32 32 32h384c17.66 0 32 14.34 32 32s-14.34 32-32 32h-32c-17.69 0-32 14.31-32 32s14.31 32 32 32h32c52.94 0 96-43.06 96-96S468.9 224 416 224z"
+                ></path></svg
+              ><span class="fs-4" style="margin-left: 10px">Wind Speed</span>
+            </div>
+            <span id="wind-speed" class="fs-4"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/script.min.js"></script>
+  </body>
+</html>
